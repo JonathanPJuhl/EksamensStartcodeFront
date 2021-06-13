@@ -1,6 +1,6 @@
 import "./App.css";
-import About from "./Components/About";
-import Notifications from "./Components/Notifications";
+
+
 import Endpoint2 from "./Components/Endpoint2";
 import Endpoint3 from "./Components/Endpoint3";
 import Top5 from "./Components/top5";
@@ -95,7 +95,7 @@ function App() {
           <NavNotLoggedIn />
           <Switch>
             <Route path="/" exact component={Home} />
-            <Route path="/about" component={About} />
+           
             <Route path="/login" component={LoginPage} />
             <Route path="/signup" component={signup} />
             <Route path="/resetpass" component={Reset}/>
@@ -113,11 +113,10 @@ function App() {
             <Switch>
               <Route path="/" exact component={HomeLoggedIn} />
               <Route path="/sys-frontend/" exact component={HomeLoggedIn} />
-              <Route path="/about" component={About} />
+             
               <Route path="/logout" component={logoutBtn} />
               <Route path="/specifistock" component={SpecificStockInfo} />
               <Route path="/top5" component={Top5} />
-              <Route path="/notifications" component={Notifications} />
               <Route path="/endpoint2" component={Endpoint2} />
               <Route path="/endpoint3" component={Endpoint3} />
               {/* <Route component={Home} /> */}
