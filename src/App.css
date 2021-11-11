@@ -5,10 +5,15 @@
 Nav {
   justify-content: space-around;
   align-items: center;
-  min-height: 10vh;
+  min-height: 12vh;
   background-color: #393e49;
   color: white;
   list-style: none;
+}
+.home{
+  display: flex;
+  justify-content: space-around;
+  float: none;
 }
 .fit100 {
   width: 100%;

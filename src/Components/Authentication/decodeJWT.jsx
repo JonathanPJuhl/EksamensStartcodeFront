@@ -1,7 +1,7 @@
-import { getToken, loggedIn } from "./Login";
-import handleHttpErrors from "./Errors";
+import { getToken, loggedIn } from "../Functionality/Login";
+import handleHttpErrors from "../Errors/Errors";
 import jwt_decode from "jwt-decode";
-import { adminURL, userURL } from "../settings";
+import { adminURL, userURL } from "../../settings";
 let username;
 const fetchUsername = () => {
   const decodeToken = (token) => {
@@ -51,6 +51,7 @@ const fetchData = () => {
   let rolesArr = [];
   rolesArr = roles.split(",");
   let options = "";
+  console.log(rolesArr);
   if (rolesArr.includes("admin")) {
     options = makeOptions("GET", true); //True adds the token
     return fetch(adminURL, options).then(handleHttpErrors);

@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { createUserURL } from "../settings";
+import { createUserURL } from "../../settings";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import "../App.css";
+import AddUser from "../Functionality/AddUser";
+import "../../App.css";
 
 function AddUserUI() {
   const init = {
@@ -120,24 +121,4 @@ function AddUserUI() {
     </div>
   );
 }
-
-function AddUser(user) {
-  const options = makeOptions("POST", false, user);
-  return fetch(createUserURL, options);
-}
-const makeOptions = (method, addToken, body) => {
-  var opts = {
-    method: method,
-    headers: {
-      "Content-type": "application/json",
-      Accept: "application/json",
-    },
-  };
-  if (body) {
-    opts.body = JSON.stringify(body);
-    console.log(JSON.stringify(body));
-  }
-  return opts;
-};
-
 export default AddUserUI;
