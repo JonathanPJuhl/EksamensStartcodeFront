@@ -2,14 +2,13 @@ import "../../../App.css";
 import { Link } from "react-router-dom";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import { fetchUsername } from "../../Authentication/decodeJWT";
 import React, { useState, useEffect } from "react";
 
 function Nav() {
+  
   useEffect(() => {
   }, []);
 
-  
   const navStyle = {
     color: " white",
   };
@@ -37,7 +36,9 @@ function Nav() {
     </nav>
   );
 }
+
 function NavNotLoggedIn() {
+  
   const navStyle = {
     color: " white",
   };
