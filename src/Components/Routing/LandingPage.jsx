@@ -8,6 +8,7 @@ import AddUserUI from "../Pages/AddUserPage";
 import { Link } from "react-router-dom";
 import logoutUser from "../Functionality/Logout";
 import checkToken from "../Authentication/CheckLocalStorageForToken"
+import UserHomePage from "../Pages/UserHomePage"
 
 function Setup () {
 
@@ -40,16 +41,18 @@ function Setup () {
     }
     const HomeLoggedIn = () => <LoggedIn />;
 
-
-
-    
     const signup = () => {
         return AddUserUI();
     };
+
     const logout = () => {
-        setLoggedIn(false);
-        return <div>{logoutUser()}</div>;
+      setLoggedIn(false);
+      return <div>{logoutUser()}</div>;
     };
+
+    const showUserPage = () => {
+      return UserHomePage();
+    }
 
 
     const logoutBtn = () => {
@@ -88,6 +91,7 @@ function Setup () {
                 <Switch>
                   <Route path="/" exact component={HomeLoggedIn} />
                   <Route path="/sys-frontend/" exact component={HomeLoggedIn} />
+                  <Route path="/profile/" exact component={showUserPage} />
                   <Route path="/logout" component={logoutBtn} />
                 </Switch>
               </div>

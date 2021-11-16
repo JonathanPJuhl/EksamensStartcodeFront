@@ -4,6 +4,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import React, { useState, useEffect } from "react";
 
+
 function Nav() {
   
   useEffect(() => {
@@ -25,8 +26,8 @@ function Nav() {
 
       <Row>
         <ul className="links">
-             <Link style={navStyle} to="/myrecords">
-              <li>My records</li>
+             <Link style={navStyle} to="/profile/">
+              <li>Profile</li>
             </Link> 
             <Link style={navStyle} to="/logout">
               <li>Logout</li>
