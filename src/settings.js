@@ -9,11 +9,13 @@ const userURL = URL + "user/user";
 const loginURL = URL + "login";
 const createUserURL = URL + "user/create";
 const accountURL = URL + "user/account/"
+const accountImageURL = URL + "user/profilePicture";
 const updateAccountURL = accountURL + "update"
 const resetURL = URL + "user/resetpass";
 const newPasswordURL = URL + "user/newpassword";
 const allUsers = URL + "user/all";
 const uploadPP = URL + "user/uploadfile";
+
 
 export {
   adminURL,
@@ -21,6 +23,7 @@ export {
   loginURL,
   createUserURL,
   accountURL,
+  accountImageURL,  
   updateAccountURL,
   resetURL,
   newPasswordURL,

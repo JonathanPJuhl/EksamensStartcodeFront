@@ -22,14 +22,14 @@ export default function makeOptions(method, addToken, body) {
       method: method,
       headers: {
         "Content-type": "multipart/*",
-        Accept: "application/json",
+        Accept: "application/octet-stream",
       },
     };
     if (addToken && loggedIn()) {
       opts.headers["x-access-token"] = getToken();
     }
     if (body) {
-      opts.body = JSON.stringify(body);
+      opts.body = body;
     }
     return opts;
   };

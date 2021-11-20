@@ -1,8 +1,9 @@
-import { accountURL, uploadPP } from "../../settings";
+import { accountURL, accountImageURL, uploadPP } from "../../settings";
 import React, { useState, useEffect } from "react";
 import { fetchUsername } from "../Authentication/decodeJWT";
 import UpdateProfile from "../Functionality/UpdateProfile";
 import makeOptions, {makeOptionsForFileUpload} from "../Functionality/MakeOptionsWithToken";
+import resizeFile from "../Functionality/ImgResizer";
 
 export default function UserHomePage() {
   
@@ -11,12 +12,19 @@ export default function UserHomePage() {
   }, []);
 
   const [accountInfo, setaccountInfo] = useState({email: "", profileText: ""});
+  const [profilePic, setProfilePic] = useState(null);
+  const [selectedFile, setSelectedFile] = useState(null);
 
   const fetchItems = async () => {
     const options = makeOptions("GET", true);
+    const picOpts = makeOptionsForFileUpload("GET", true);
     const accData = await fetch(accountURL + fetchUsername(), options);
+    const accPic = await fetch(accountImageURL, picOpts);
     const accInfo = await accData.json();
-  
+    const picText = await accPic.blob();
+    
+    const localUrl = URL.createObjectURL(picText);
+    setProfilePic(localUrl);
     setaccountInfo(accInfo);
   };
 
@@ -34,10 +42,15 @@ export default function UserHomePage() {
     UpdateProfile(accountInfo)
   };
   const HandleFileUpload = (evt) => {
-    console.log(evt.target.files[0])
-      const options = makeOptionsForFileUpload("POST", true, evt.target.files[0]);
-      const accData = fetch(uploadPP, options);
+    evt.preventDefault();
+    const options = makeOptionsForFileUpload("POST", true, selectedFile);
+    fetch(uploadPP, options);
   };
+  const FixFile = async (evt) => {
+    evt.preventDefault();
+    const img = await resizeFile(evt.target.files[0]);
+    setSelectedFile(img);
+  }
   
     return (
      
@@ -48,14 +61,18 @@ export default function UserHomePage() {
             <p>Profile Text:</p>
             <textarea type="text" id="profileText" defaultValue = {accountInfo.profileText}></textarea>
             <p>Profile picure:</p>
-            <input type="file" name="file" onChange={HandleFileUpload}/>
+            <img src={profilePic}/>
+            <br></br>
+            <br></br>
+            <br></br>
+            <input type="file" name="file" onChange={FixFile}/>
+            <button onClick={HandleFileUpload}>Submit new profile picture</button>
             <br></br>
             <br></br>
             <input
               className="buttons"
               type="submit"
               value="Update"
-              //onClick={update}
             />
           </form>
         </div>

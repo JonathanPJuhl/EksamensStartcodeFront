@@ -39,7 +39,6 @@ const fetchData = () => {
 
   let getDecodedToken = () => {
     let token = getToken();
-
     if (token) {
       return decodeToken(token);
     }
@@ -53,11 +52,12 @@ const fetchData = () => {
   let rolesArr = [];
   rolesArr = roles.split(",");
   let options = "";
-  console.log(rolesArr);
+
   if (rolesArr.includes("admin")) {
-    options = makeOptions("GET", true); //True adds the token
+    options = makeOptions("GET", true);
     return fetch(adminURL, options).then(handleHttpErrors);
-  } else options = makeOptions("GET", true); //True adds the token
+  } else options = makeOptions("GET", true);
+  
   return fetch(userURL, options).then(handleHttpErrors);
 };
 export { fetchData, fetchUsername, username };
