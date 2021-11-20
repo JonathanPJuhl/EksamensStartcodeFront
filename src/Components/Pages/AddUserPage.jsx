@@ -26,7 +26,6 @@ function AddUserUI() {
   };
   function handleSubmit(evt) {
     evt.preventDefault();
-    console.log(user.passCheck + user.password);
     if (user.password != user.passCheck) {
       alert("passwords don't match");
     } else if (user.password == user.passCheck && user.password.length < 8) {

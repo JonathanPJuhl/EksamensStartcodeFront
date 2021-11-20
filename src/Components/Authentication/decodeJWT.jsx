@@ -2,6 +2,8 @@ import { getToken, loggedIn } from "../Functionality/Login";
 import handleHttpErrors from "../Errors/Errors";
 import jwt_decode from "jwt-decode";
 import { adminURL, userURL } from "../../settings";
+import makeOptions from "../Functionality/MakeOptionsWithToken";
+
 let username;
 const fetchUsername = () => {
   const decodeToken = (token) => {
@@ -57,21 +59,5 @@ const fetchData = () => {
     return fetch(adminURL, options).then(handleHttpErrors);
   } else options = makeOptions("GET", true); //True adds the token
   return fetch(userURL, options).then(handleHttpErrors);
-};
-const makeOptions = (method, addToken, body) => {
-  var opts = {
-    method: method,
-    headers: {
-      "Content-type": "application/json",
-      Accept: "application/json",
-    },
-  };
-  if (addToken && loggedIn()) {
-    opts.headers["x-access-token"] = getToken();
-  }
-  if (body) {
-    opts.body = JSON.stringify(body);
-  }
-  return opts;
 };
 export { fetchData, fetchUsername, username };

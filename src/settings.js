@@ -1,21 +1,19 @@
 const URL = "http://localhost:8080/backend_eksamen/api/";
 //const URL = "https://www.ipwithme.com/tomcat/backend_eksamen/api/"
 
+const captcha = "6Lf-_TodAAAAAA3qqZXc7i4TtBY46F-04Meosv6s";
+
+
 const adminURL = URL + "user/admin";
 const userURL = URL + "user/user";
-const accountURL = URL + "user/account/"
-const createUserURL = URL + "user/create";
 const loginURL = URL + "login";
+const createUserURL = URL + "user/create";
+const accountURL = URL + "user/account/"
+const updateAccountURL = accountURL + "update"
 const resetURL = URL + "user/resetpass";
 const newPasswordURL = URL + "user/newpassword";
-const createProj = URL + "project/create"
-const allProjs = URL + "project/all"
-const allDevs = URL + "user/all"
-const assignDevToProj = URL + "project/assign/"
-const allUserstoriesForSpecificProject = URL + "project/alluserstoriesforgivenproject/"
-const addRecord = URL + "project/record"
-const myRecords = URL + "project/myrecords/"
-const invoice = URL + "project/invoice/"
+const allUsers = URL + "user/all";
+const uploadPP = URL + "user/uploadfile";
 
 export {
   adminURL,
@@ -23,14 +21,9 @@ export {
   loginURL,
   createUserURL,
   accountURL,
+  updateAccountURL,
   resetURL,
   newPasswordURL,
-  createProj,
-  allProjs,
-  allDevs,
-  assignDevToProj,
-  allUserstoriesForSpecificProject,
-  addRecord,
-  myRecords,
-  invoice
+  captcha,
+  uploadPP,
 };

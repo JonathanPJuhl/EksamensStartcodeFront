@@ -1,8 +1,8 @@
-import { accountURL } from "../../settings";
+import { accountURL, uploadPP } from "../../settings";
 import React, { useState, useEffect } from "react";
 import { fetchUsername } from "../Authentication/decodeJWT";
-import { getToken, loggedIn } from "../Functionality/Login";
 import UpdateProfile from "../Functionality/UpdateProfile";
+import makeOptions, {makeOptionsForFileUpload} from "../Functionality/MakeOptionsWithToken";
 
 export default function UserHomePage() {
   
@@ -12,23 +12,6 @@ export default function UserHomePage() {
 
   const [accountInfo, setaccountInfo] = useState({email: "", profileText: ""});
 
-  const makeOptions = (method, addToken, body) => {
-    var opts = {
-      method: method,
-      headers: {
-        "Content-type": "application/json",
-        Accept: "application/json",
-      },
-    };
-    if (addToken && loggedIn()) {
-      opts.headers["x-access-token"] = getToken();
-    }
-    if (body) {
-      opts.body = JSON.stringify(body);
-    }
-    return opts;
-  };
-
   const fetchItems = async () => {
     const options = makeOptions("GET", true);
     const accData = await fetch(accountURL + fetchUsername(), options);
@@ -37,27 +20,42 @@ export default function UserHomePage() {
     setaccountInfo(accInfo);
   };
 
-  function HandleOnChange() {
+  const HandleOnChange = (evt) => {
+    evt.preventDefault();
+    let target = evt.target;
+    let id = target.id;
+    let value = target.value;
 
+    setaccountInfo({ ...accountInfo, [id]: value });
   }
+
+  const update = (evt) => {
+    evt.preventDefault();
+    UpdateProfile(accountInfo)
+  };
+  const HandleFileUpload = (evt) => {
+    console.log(evt.target.files[0])
+      const options = makeOptionsForFileUpload("POST", true, evt.target.files[0]);
+      const accData = fetch(uploadPP, options);
+  };
   
     return (
      
         <div>
-          <form onChange={HandleOnChange}>
+          <form onChange={HandleOnChange} onSubmit={update}>
             <p>Username:</p>
-            <input type="email" id="username" defaultValue = {accountInfo.email}></input> 
+            <input type="email" id="email" defaultValue = {accountInfo.email}></input> 
             <p>Profile Text:</p>
-            <textarea type="text" id="profile-text" defaultValue = {accountInfo.profileText}></textarea>
+            <textarea type="text" id="profileText" defaultValue = {accountInfo.profileText}></textarea>
+            <p>Profile picure:</p>
+            <input type="file" name="file" onChange={HandleFileUpload}/>
             <br></br>
             <br></br>
             <input
-              class="buttons"
-              type="button"
+              className="buttons"
+              type="submit"
               value="Update"
-              onClick={UpdateProfile}
-              Reset
-              password
+              //onClick={update}
             />
           </form>
         </div>

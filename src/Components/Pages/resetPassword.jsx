@@ -2,28 +2,14 @@ import {resetURL, newPasswordURL} from "../../settings"
 import "../../App.css";
 import React, { useState } from "react";
 import handleHttpErrors from "../Errors/Errors"
+import makeOptions from "../Functionality/MakeOptionsWithToken";
 
-const makeOptions = (method, body) => {
-    var opts = {
-      method: method,
-      headers: {
-        "Content-type": "application/json",
-        Accept: "application/json",
-      },
-      data: { access_key: "5feeee1a869fedc6e6e24e62c735bc22" },
-    };
-    if (body) {
-        opts.body = JSON.stringify(body);
-      }
-    return opts;
-  };
-  
 function Reset() {
 
   const [accountInfo, setaccountInfo] = useState({email: "", answerToSecurityQuestion: ""});
 
   const fetchSearchData = async () => {
-    const options = makeOptions("POST", accountInfo);
+    const options = makeOptions("POST", false, accountInfo);
     return fetch(resetURL, options)
       .then(handleHttpErrors)
        .then(alert("Mail sent to: " + accountInfo.email))
