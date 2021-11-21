@@ -13,6 +13,8 @@
     "react": "^17.0.2",
     "react-bootstrap": "^1.5.2",
     "react-dom": "^17.0.2",
+    "react-google-recaptcha": "^2.1.0",
+    "react-image-file-resizer": "^0.4.7",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
     "react-search-autocomplete": "^5.2.2",
@@ -30,7 +32,7 @@
       "react-app/jest"
     ]
   },
-  "homepage": ".",
+  "homepage": "../eksamen-front",
   "browserslist": {
     "production": [
       ">0.2%",

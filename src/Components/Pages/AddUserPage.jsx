@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { createUserURL } from "../settings";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import "../App.css";
+import AddUser from "../Functionality/AddUser";
+import "../../App.css";
 
 function AddUserUI() {
   const init = {
@@ -25,10 +25,9 @@ function AddUserUI() {
   };
   function handleSubmit(evt) {
     evt.preventDefault();
-    console.log(user.passCheck + user.password);
-    if (user.password != user.passCheck) {
+    if (user.password !== user.passCheck) {
       alert("passwords don't match");
-    } else if (user.password == user.passCheck && user.password.length < 8) {
+    } else if (user.password === user.passCheck && user.password.length < 8) {
       alert("password must be more than 8 characters");
     } else {
       AddUser(user);
@@ -120,24 +119,4 @@ function AddUserUI() {
     </div>
   );
 }
-
-function AddUser(user) {
-  const options = makeOptions("POST", false, user);
-  return fetch(createUserURL, options);
-}
-const makeOptions = (method, addToken, body) => {
-  var opts = {
-    method: method,
-    headers: {
-      "Content-type": "application/json",
-      Accept: "application/json",
-    },
-  };
-  if (body) {
-    opts.body = JSON.stringify(body);
-    console.log(JSON.stringify(body));
-  }
-  return opts;
-};
-
 export default AddUserUI;

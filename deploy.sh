@@ -18,5 +18,5 @@ echo "##############################"
 echo "Deploying Frontend project..."
 echo "##############################"
 
-scp -r ./build/* root@ipwithme.com:/var/www/html/sys-frontend
+scp -r ./build/* root@ipwithme.com:/var/www/html/eksamen-front
 

@@ -1,35 +1,19 @@
-import {resetURL, newPasswordURL} from "../settings"
-import "../App.css";
+import {resetURL, newPasswordURL} from "../../settings"
+import "../../App.css";
 import React, { useState } from "react";
-import handleHttpErrors from "../Components/Errors"
-import * as ReactBootStrap from "react-bootstrap";
+import handleHttpErrors from "../Errors/Errors"
+import makeOptions from "../Functionality/MakeOptionsWithToken";
 
-const makeOptions = (method, body) => {
-    var opts = {
-      method: method,
-      headers: {
-        "Content-type": "application/json",
-        Accept: "application/json",
-      },
-      data: { access_key: "5feeee1a869fedc6e6e24e62c735bc22" },
-    };
-    if (body) {
-        opts.body = JSON.stringify(body);
-      }
-    return opts;
-  };
-  
-function Reset(){
-const [accountInfo, setaccountInfo] = useState({email: "", answerToSecurityQuestion: ""});
+function Reset() {
 
+  const [accountInfo, setaccountInfo] = useState({email: "", answerToSecurityQuestion: ""});
 
-const fetchSearchData = async () => {
-    const options = makeOptions("POST", accountInfo);
+  const fetchSearchData = async () => {
+    const options = makeOptions("POST", false, accountInfo);
     return fetch(resetURL, options)
       .then(handleHttpErrors)
        .then(alert("Mail sent to: " + accountInfo.email))
   };
-  
   
   const HandleOnChange = (evt) => {
     evt.preventDefault();
@@ -39,21 +23,23 @@ const fetchSearchData = async () => {
 
     setaccountInfo({ ...accountInfo, [id]: value });
   };
-return (
-  <div>
-      <form onChange={HandleOnChange} >
-      <p>Username:</p>
-      <input type="text" id="email"></input>
-      <p>Answer to recoveryquestion: </p>
-      <input type="text" id="answerToSecurityQuestion"></input>
-      <br></br>
-      <br></br>
-      <p>Forgot your password - or just want to reset it?</p>
-      <input class="buttons" type="button" value="Submit" onClick={fetchSearchData}Reset password/>
-      </form >
-  </div>
-);
+
+  return (
+    <div>
+        <form onChange={HandleOnChange} >
+        <p>Username:</p>
+        <input type="text" id="email"></input>
+        <p>Answer to recoveryquestion: </p>
+        <input type="text" id="answerToSecurityQuestion"></input>
+        <br></br>
+        <br></br>
+        <p>Forgot your password - or just want to reset it?</p>
+        <input class="buttons" type="button" value="Submit" onClick={fetchSearchData}Reset password/>
+        </form >
+    </div>
+  );
 }
+
 function ResetPassword(){
   const [newPass, setNewPass] = useState({username: "", password: "", passConfirm: ""});
 
@@ -67,7 +53,7 @@ function ResetPassword(){
     setNewPass({ ...newPass, [id]: value });
     };
 
-const fetchSearchDataPass = async () => {
+  const fetchSearchDataPass = async () => {
     const options = makeOptions("POST", newPass);
     return fetch(newPasswordURL, options)
       .then(handleHttpErrors)
@@ -88,7 +74,7 @@ const fetchSearchDataPass = async () => {
         <br></br>
         <br></br>
         <p>Create new password</p>
-        <input type="button" class="buttons" type="button" value="Submit" onClick={fetchSearchDataPass}/>
+        <input type="button" class="buttons" value="Submit" onClick={fetchSearchDataPass}/>
         </form>
     </div>
   );
