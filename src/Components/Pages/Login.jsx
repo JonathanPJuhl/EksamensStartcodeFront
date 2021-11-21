@@ -50,7 +50,7 @@ function LogIn({ setLoggedIn }) {
                onChange={onCaptchaChange}
             />
           </div>
-          <Link to="/">
+          <Link to="/profile">
             <button type="button" id="btnn" onClick={performLogin}>
               Login
             </button>

@@ -42,13 +42,10 @@ const fetchData = () => {
     if (token) {
       return decodeToken(token);
     }
-
     return null;
   };
   let tokenFinished = getDecodedToken();
-
   let roles = tokenFinished.roles;
-
   let rolesArr = [];
   rolesArr = roles.split(",");
   let options = "";
@@ -60,4 +57,36 @@ const fetchData = () => {
   
   return fetch(userURL, options).then(handleHttpErrors);
 };
-export { fetchData, fetchUsername, username };
+
+const getTokenExpire = () => {
+  const decodeToken = (token) => {
+    return jwt_decode(token, { complete: true });
+  };
+
+  let getDecodedToken = () => {
+    let token = getToken();
+
+    if (token) {
+      return decodeToken(token);
+    }
+
+    return null;
+  };
+  
+  if(getDecodedToken() !== undefined && getDecodedToken() !== null) {
+    let tokenFinished = getDecodedToken();
+      let expire = tokenFinished.exp;
+      let currentDate = new Date();
+
+      if(expire === undefined) {
+        //localStorage.removeItem("jwtToken");
+        return false;
+      } else if (expire <= Math.floor(currentDate.getTime()/1000)) {
+        //localStorage.removeItem("jwtToken");
+        return false;
+      }
+      return true;
+  }
+  return false;
+};
+export { fetchData, fetchUsername, getTokenExpire, username };

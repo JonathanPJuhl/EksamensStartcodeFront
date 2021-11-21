@@ -2,17 +2,16 @@ import Nav, { NavNotLoggedIn } from "../Pages/PageAdditions/Nav";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Reset, {ResetPassword} from "../Pages/resetPassword"
 import React, { useState, useEffect } from "react";
-import { fetchData} from "../Authentication/decodeJWT";
+import { fetchData, getTokenExpire} from "../Authentication/decodeJWT";
 import LogIn from "../Pages/Login"
 import AddUserUI from "../Pages/AddUserPage";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import logoutUser from "../Functionality/Logout";
-import checkToken from "../Authentication/CheckLocalStorageForToken"
 import UserHomePage from "../Pages/UserHomePage"
 
 function Setup () {
 
-    let logged = checkToken();
+    let logged = getTokenExpire();
 
     const [loggedIn, setLoggedIn] = useState(logged);
 
@@ -51,6 +50,9 @@ function Setup () {
     };
 
     const showUserPage = () => {
+      if(logged === false) {
+        return <Redirect to="localhost:3000"> {window.location.reload()}</Redirect>
+      }
       return UserHomePage();
     }
 
