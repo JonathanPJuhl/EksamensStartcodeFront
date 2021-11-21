@@ -74,7 +74,7 @@ function ResetPassword(){
         <br></br>
         <br></br>
         <p>Create new password</p>
-        <input type="button" class="buttons" type="button" value="Submit" onClick={fetchSearchDataPass}/>
+        <input type="button" class="buttons" value="Submit" onClick={fetchSearchDataPass}/>
         </form>
     </div>
   );

@@ -1,4 +1,4 @@
-import { getToken, loggedIn } from "../Functionality/Login";
+import { getToken } from "../Functionality/Login";
 import handleHttpErrors from "../Errors/Errors";
 import jwt_decode from "jwt-decode";
 import { adminURL, userURL } from "../../settings";
@@ -22,7 +22,7 @@ const fetchUsername = () => {
   let tokenFinished = getDecodedToken();
   username = tokenFinished.username;
   
-  if (username == undefined) {
+  if (username === undefined) {
     return (
       <div>
         <p>Please login</p>

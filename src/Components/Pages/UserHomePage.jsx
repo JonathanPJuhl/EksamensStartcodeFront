@@ -1,6 +1,5 @@
 import { accountURL, accountImageURL, uploadPP } from "../../settings";
 import React, { useState, useEffect } from "react";
-import { fetchUsername } from "../Authentication/decodeJWT";
 import UpdateProfile from "../Functionality/UpdateProfile";
 import makeOptions, {makeOptionsForFileUpload} from "../Functionality/MakeOptionsWithToken";
 import resizeFile from "../Functionality/ImgResizer";
@@ -18,7 +17,7 @@ export default function UserHomePage() {
   const fetchItems = async () => {
     const options = makeOptions("GET", true);
     const picOpts = makeOptionsForFileUpload("GET", true);
-    const accData = await fetch(accountURL + fetchUsername(), options);
+    const accData = await fetch(accountURL, options);
     const accPic = await fetch(accountImageURL, picOpts);
     const accInfo = await accData.json();
     const picText = await accPic.blob();
@@ -37,12 +36,12 @@ export default function UserHomePage() {
     setaccountInfo({ ...accountInfo, [id]: value });
   }
 
-  const update = (evt) => {
-    evt.preventDefault();
+  const update = () => {
     UpdateProfile(accountInfo)
   };
+
   const HandleFileUpload = (evt) => {
-    evt.preventDefault();
+    window.location.reload(true)
     const options = makeOptionsForFileUpload("POST", true, selectedFile);
     fetch(uploadPP, options);
   };
@@ -61,7 +60,7 @@ export default function UserHomePage() {
             <p>Profile Text:</p>
             <textarea type="text" id="profileText" defaultValue = {accountInfo.profileText}></textarea>
             <p>Profile picure:</p>
-            <img src={profilePic}/>
+            <img src={profilePic} alt=""/>
             <br></br>
             <br></br>
             <br></br>

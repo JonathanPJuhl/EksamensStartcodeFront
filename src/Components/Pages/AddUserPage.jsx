@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { createUserURL } from "../../settings";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -26,9 +25,9 @@ function AddUserUI() {
   };
   function handleSubmit(evt) {
     evt.preventDefault();
-    if (user.password != user.passCheck) {
+    if (user.password !== user.passCheck) {
       alert("passwords don't match");
-    } else if (user.password == user.passCheck && user.password.length < 8) {
+    } else if (user.password === user.passCheck && user.password.length < 8) {
       alert("password must be more than 8 characters");
     } else {
       AddUser(user);

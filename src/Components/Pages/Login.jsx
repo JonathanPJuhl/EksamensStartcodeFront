@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import loginWithUser from "../Functionality/Login";
 import ReCAPTCHA from "react-google-recaptcha";
 import { captcha } from "../../settings";
@@ -13,14 +13,12 @@ function LogIn({ setLoggedIn }) {
           if (captchaVal === undefined) {
               return false;
           } else {
-              alert("validated");
               return true;
           }
     }
     const performLogin = (evt) => {
       if(validateRecaptcha()) {
       evt.preventDefault();
-      console.log(loginCredentials);
       loginWithUser(loginCredentials.username, loginCredentials.password, {setLoggedIn}); 
       }
       else {
@@ -36,10 +34,8 @@ function LogIn({ setLoggedIn }) {
       });
     };
     const onCaptchaChange = (value) => {
-      console.log("Captcha value:", value);
       setCaptcha(value);
     };
-    
 
     return (
       <div>
