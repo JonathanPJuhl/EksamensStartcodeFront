@@ -60,6 +60,7 @@ const fetchData = () => {
 
 const getTokenExpire = () => {
   const decodeToken = (token) => {
+    console.log(token);
     return jwt_decode(token, { complete: true });
   };
 
