@@ -1,7 +1,7 @@
-import { accountURL, accountImageURL, uploadPP } from "../../settings";
+import { accountURL, accountImageURL, uploadPP, virusTotal } from "../../settings";
 import React, { useState, useEffect } from "react";
 import UpdateProfile from "../Functionality/UpdateProfile";
-import makeOptions, {makeOptionsForFileUpload} from "../Functionality/MakeOptionsWithToken";
+import makeOptions, {makeOptionsForFileUpload, makeOptionsForFileUploadCheck} from "../Functionality/MakeOptionsWithToken";
 import resizeFile from "../Functionality/ImgResizer";
 
 export default function UserHomePage() {
@@ -46,8 +46,27 @@ export default function UserHomePage() {
     fetch(uploadPP, options);
   };
   const FixFile = async (evt) => {
+
     evt.preventDefault();
-    const img = await resizeFile(evt.target.files[0]);
+    
+    
+    let file = evt.target.files[0];
+    // This SHOULD work, but apparently virustotal has a bug on their api
+    //which makes this non-functional
+    /* 
+    const Buffer = require('buffer').Buffer;
+    if (typeof input=="string") file = Buffer.from(file, 'utf8')
+    if (Buffer.isBuffer(file)) file = file;
+    file = JSON.stringify(file);
+    let formData = new FormData();
+    let fileObj = {value: file, options: {filename: file.name, filetype: file.type}};
+    formData.append("file", fileObj);
+    const fileCheckOpts = makeOptionsForFileUploadCheck("POST", formData);
+    console.log(evt.target.files[0], fileCheckOpts);
+    const fileCheck = await fetch(virusTotal, fileCheckOpts);
+    const filecheckJson = await fileCheck.json();
+    */
+    const img = await resizeFile(file);
     setSelectedFile(img);
   }
   

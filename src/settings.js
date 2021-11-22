@@ -15,6 +15,7 @@ const resetURL = URL + "user/resetpass";
 const newPasswordURL = URL + "user/newpassword";
 //const allUsers = URL + "user/all";
 const uploadPP = URL + "user/uploadfile";
+const virusTotal = "https://www.virustotal.com/api/v3/files";
 
 
 export {
@@ -29,4 +30,5 @@ export {
   newPasswordURL,
   captcha,
   uploadPP,
+  virusTotal,
 };
