@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import loginWithUser from "../Functionality/Login";
 import ReCAPTCHA from "react-google-recaptcha";
 import { captcha } from "../../settings";
@@ -40,12 +40,11 @@ function LogIn({ setLoggedIn }) {
           }
     }
     const performLogin = (evt) => {
+      //evt.preventDefault();
       if(validateRecaptcha()) {
-      evt.preventDefault();
       loginWithUser(loginCredentials.username, loginCredentials.password, {setLoggedIn}); 
       }
       else {
-        evt.preventDefault();
         alert("Please confirm that you are not a robot")
       }     
     };
@@ -59,14 +58,6 @@ function LogIn({ setLoggedIn }) {
     const onCaptchaChange = (value) => {
       setCaptcha(value);
     };
-
-
-  const onChange = (evt) => {
-    setLoginCredentials({
-      ...loginCredentials,
-      [evt.target.id]: evt.target.value,
-    });
-  };
 
   return (
     <div>
@@ -84,7 +75,7 @@ function LogIn({ setLoggedIn }) {
           <ReCAPTCHA sitekey={captcha} onChange={onCaptchaChange} />
         </div>
         <Link to="/">
-          <button type="button" id="btnn" onClick={performLogin()}>
+          <button type="button" id="btnn" onClick={performLogin}>
             Login
           </button>
         </Link>
