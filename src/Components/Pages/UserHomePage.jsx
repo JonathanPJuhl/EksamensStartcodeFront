@@ -5,7 +5,6 @@ import makeOptions, {makeOptionsForFileUpload, makeOptionsForFileUploadCheck} fr
 import resizeFile from "../Functionality/ImgResizer";
 
 export default function UserHomePage() {
-  
   useEffect(() => {
     fetchItems();
   }, []);
@@ -24,6 +23,7 @@ export default function UserHomePage() {
     
     const localUrl = URL.createObjectURL(picText);
     setProfilePic(localUrl);
+
     setaccountInfo(accInfo);
   };
 
@@ -34,7 +34,7 @@ export default function UserHomePage() {
     let value = target.value;
 
     setaccountInfo({ ...accountInfo, [id]: value });
-  }
+  };
 
   const update = () => {
     UpdateProfile(accountInfo)

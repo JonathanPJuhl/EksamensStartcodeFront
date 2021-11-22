@@ -3,7 +3,6 @@ const URL = "http://localhost:8080/backend_eksamen/api/";
 
 const captcha = "6Lf-_TodAAAAAA3qqZXc7i4TtBY46F-04Meosv6s";
 
-
 const adminURL = URL + "user/admin";
 const userURL = URL + "user/user";
 const loginURL = URL + "login";

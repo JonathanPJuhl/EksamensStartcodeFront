@@ -3,10 +3,10 @@ import React from "react";
 import Setup from "./Components/Routing/LandingPage"
 
 function App() {
- return (
+  return (
     <div className="App">
       <div>
-        <Setup/>
+        <Setup />
       </div>
     </div>
   );
