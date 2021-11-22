@@ -19,14 +19,17 @@ const loggedIn = () => {
   const loggedIn = getToken() != null;
   return loggedIn;
 };
- async function loginWithUser (user, password, {setLoggedIn}) {
+ async function loginWithUser (user, password, ip, {setLoggedIn}) {
   const options = makeOptions("POST", true, {
     username: user,
     password: password,
+    ip: ip,
   });
+  console.log(loginURL, options);
    return await fetch(loginURL, options)
      .then(handleHttpErrors)
       .then((res) => {
+        console.log(res);
        setToken(res.token);
    }).then(() => setLoggedIn(checkToken()));
  }
