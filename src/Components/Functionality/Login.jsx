@@ -15,24 +15,25 @@ const removeToken = () => {
 const setToken = (token) => {
   localStorage.setItem("jwtToken", token);
 };
+
 const loggedIn = () => {
   const loggedIn = getToken() != null;
   return loggedIn;
 };
- async function loginWithUser (user, password, ip, {setLoggedIn}) {
-  const options = makeOptions("POST", true, {
-    username: user,
-    password: password,
-    ip: ip,
-  });
-  console.log(loginURL, options);
-   return await fetch(loginURL, options)
-     .then(handleHttpErrors)
-      .then((res) => {
-        console.log(res);
-       setToken(res.token);
-   }).then(() => setLoggedIn(checkToken()));
- }
+
+async function loginWithUser (user, password, ip, {setLoggedIn}) {
+ const options = makeOptions("POST", true, {
+   username: user,
+   password: password,
+   ip: ip,
+ });
+  return await fetch(loginURL, options)
+    .then(handleHttpErrors)
+     .then((res) => {
+       console.log(res);
+      setToken(res.token);
+  }).then(() => setLoggedIn(checkToken()));
+}
 
 export default loginWithUser;
 export { getToken, loggedIn, removeToken };

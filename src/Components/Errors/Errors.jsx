@@ -8,8 +8,7 @@ function handleHttpErrors(res) {
   }
   if (res.status === 401) {
     alert("Wrong username or password");
-    return res.json();
-    //return Promise.reject({ status: res.status, fullError: res.json });
+    return Promise.reject({ status: res.status, fullError: res.json });
   }
   if (!res.ok) {
     return Promise.reject({ status: res.status, fullError: res.json() });

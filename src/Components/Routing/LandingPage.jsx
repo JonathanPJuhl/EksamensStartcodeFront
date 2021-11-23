@@ -8,6 +8,7 @@ import AddUserUI from "../Pages/AddUserPage";
 import { Link, Redirect } from "react-router-dom";
 import logoutUser from "../Functionality/Logout";
 import UserHomePage from "../Pages/UserHomePage"
+import Unlock from "../Pages/UnlockAccount";
 
 function Setup () {
 
@@ -77,6 +78,7 @@ function Setup () {
               <NavNotLoggedIn />
               <Switch>
                 <Route path="/" exact component={Home} />
+                <Route path="/unlock" exact component={Unlock} />
                 <Route path="/login" component={Login} />
                 <Route path="/signup" component={signup} />
                 <Route path="/resetpass" component={Reset}/>
@@ -92,6 +94,7 @@ function Setup () {
                 <Nav />
                 <Switch>
                   <Route path="/" exact component={HomeLoggedIn} />
+                  <Route path="/unlock" exact component={Unlock} />
                   <Route path="/sys-frontend/" exact component={HomeLoggedIn} />
                   <Route path="/profile/" exact component={showUserPage} />
                   <Route path="/logout" component={logoutBtn} />

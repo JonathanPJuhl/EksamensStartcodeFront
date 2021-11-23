@@ -42,7 +42,6 @@ function LogIn({ setLoggedIn }) {
       else if (validateRecaptcha() &&
         CheckForInjection(loginCredentials.username) &&
         CheckForInjection(loginCredentials.password)) {
-          //AddIPToDB(ip, loginCredentials.username, "login");
         loginWithUser(loginCredentials.username, loginCredentials.password, ip, {setLoggedIn}); 
       }
       
