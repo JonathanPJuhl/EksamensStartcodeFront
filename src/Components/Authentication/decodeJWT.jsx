@@ -58,9 +58,50 @@ const fetchData = () => {
   return fetch(userURL, options).then(handleHttpErrors);
 };
 
+const getRoles = (token) => {
+  const decodeToken = (token) => {
+    return jwt_decode(token, { complete: true });
+  };
+  let tokenFinished;
+  if (token) {
+    tokenFinished = decodeToken(token);
+  }
+
+  let roles = tokenFinished.roles;
+  let rolesArr = [];
+  rolesArr = roles.split(",");
+
+  return rolesArr[0];
+};
+const getRolesFromStorage = () => {
+  const decodeToken = (token) => {
+    return jwt_decode(token, { complete: true });
+  };
+
+  let getDecodedToken = () => {
+    let token = getToken();
+
+    if (token) {
+      return decodeToken(token);
+    }
+
+    return null;
+  };
+  let tokenFinished = getDecodedToken();
+
+  if(tokenFinished !== undefined && getTokenExpire()===true) {
+    console.log(tokenFinished);
+    let roles = tokenFinished.roles;
+    let rolesArr = [];
+    rolesArr = roles.split(",");
+    return rolesArr[0];
+} else {
+  return null;
+}
+};
+
 const getTokenExpire = () => {
   const decodeToken = (token) => {
-    console.log(token);
     return jwt_decode(token, { complete: true });
   };
 
@@ -90,4 +131,4 @@ const getTokenExpire = () => {
   }
   return false;
 };
-export { fetchData, fetchUsername, getTokenExpire, username };
+export { fetchData, fetchUsername, getTokenExpire, getRoles, getRolesFromStorage, username };

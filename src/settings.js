@@ -12,10 +12,15 @@ const accountImageURL = URL + "user/profilePicture";
 const updateAccountURL = accountURL + "/update"
 const resetURL = URL + "user/resetpass";
 const newPasswordURL = URL + "user/newpassword";
-//const allUsers = URL + "user/all";
 const uploadPP = URL + "user/uploadfile";
 const virusTotal = "https://www.virustotal.com/api/v3/files";
-
+const registerMaliciousIntentURL = URL + "malicious";
+const unlockURL = URL + "user/unlock";
+const sendTwoFactor = URL + "login/2fa";
+const validateTwoFactor = URL + "login/2fa/validate";
+const allUsers = URL + "admin/allUsers";
+const activateUser = URL + "admin/user/activate";
+const deActivateUser = URL + "admin/user/deactivate";
 
 export {
   adminURL,
@@ -30,4 +35,11 @@ export {
   captcha,
   uploadPP,
   virusTotal,
+  registerMaliciousIntentURL,
+  unlockURL,
+  sendTwoFactor,
+  validateTwoFactor,
+  allUsers,
+  activateUser,
+  deActivateUser,
 };
