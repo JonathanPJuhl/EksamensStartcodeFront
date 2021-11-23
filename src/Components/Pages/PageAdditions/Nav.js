@@ -65,5 +65,35 @@ function NavNotLoggedIn() {
   );
 }
 
+function AdminNav () {
+  const navStyle = {
+    color: " white",
+  };
+
+  return (
+      getTokenExpire() ? (
+        <nav>
+          <Row>
+            <Col>
+              <Link className="home" style={navStyle} to="/">
+                <h3>Home</h3>
+              </Link>
+            </Col>
+          </Row>
+          <Row>
+            <ul className="links">
+                <Link style={navStyle} to="/overview">
+                  <li>All users</li>
+                </Link> 
+                <Link style={navStyle} to="/logout">
+                  <li>Logout</li>
+                </Link>
+            </ul>
+          </Row>
+        </nav>
+    ): ( NavNotLoggedIn() )
+  );
+}
+
 export default Nav;
-export { NavNotLoggedIn };
+export { NavNotLoggedIn, AdminNav };

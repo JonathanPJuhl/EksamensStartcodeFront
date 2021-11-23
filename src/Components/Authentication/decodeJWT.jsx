@@ -57,10 +57,24 @@ const fetchData = () => {
   
   return fetch(userURL, options).then(handleHttpErrors);
 };
+const getRoles = (token) => {
+  const decodeToken = (token) => {
+    return jwt_decode(token, { complete: true });
+  };
+  let tokenFinished;
+  if (token) {
+    tokenFinished = decodeToken(token);
+  }
+
+  let roles = tokenFinished.roles;
+  let rolesArr = [];
+  rolesArr = roles.split(",");
+
+  return rolesArr[0];
+};
 
 const getTokenExpire = () => {
   const decodeToken = (token) => {
-    console.log(token);
     return jwt_decode(token, { complete: true });
   };
 
@@ -90,4 +104,4 @@ const getTokenExpire = () => {
   }
   return false;
 };
-export { fetchData, fetchUsername, getTokenExpire, username };
+export { fetchData, fetchUsername, getTokenExpire, getRoles, username };

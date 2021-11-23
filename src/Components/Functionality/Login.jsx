@@ -2,7 +2,7 @@ import handleHttpErrors from "../Errors/Errors";
 import { loginURL } from "../../settings";
 import checkToken from "../Authentication/CheckLocalStorageForToken";
 import makeOptions from "../Functionality/MakeOptionsWithToken";
-
+import { getRoles } from "../Authentication/decodeJWT";
 
 const getToken = () => {
   return localStorage.getItem("jwtToken");
@@ -21,7 +21,7 @@ const loggedIn = () => {
   return loggedIn;
 };
 
-async function loginWithUser (user, password, ip, {setLoggedIn}) {
+async function loginWithUser (user, password, ip, {setLoggedIn, setRole}) {
  const options = makeOptions("POST", true, {
    username: user,
    password: password,
@@ -30,8 +30,8 @@ async function loginWithUser (user, password, ip, {setLoggedIn}) {
   return await fetch(loginURL, options)
     .then(handleHttpErrors)
      .then((res) => {
-       console.log(res);
       setToken(res.token);
+      setRole(getRoles(res.token))
   }).then(() => setLoggedIn(checkToken()));
 }
 

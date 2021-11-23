@@ -16,7 +16,9 @@ const newPasswordURL = URL + "user/newpassword";
 const uploadPP = URL + "user/uploadfile";
 const virusTotal = "https://www.virustotal.com/api/v3/files";
 const registerMaliciousIntentURL = URL + "malicious";
-const unlockURL = URL + "user/unlock"
+const unlockURL = URL + "user/unlock";
+const sendTwoFactor = URL + "login/2fa";
+const validateTwoFactor = URL + "login/2fa/validate";
 
 
 export {
@@ -34,4 +36,6 @@ export {
   virusTotal,
   registerMaliciousIntentURL,
   unlockURL,
+  sendTwoFactor,
+  validateTwoFactor,
 };
