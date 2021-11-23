@@ -5,11 +5,12 @@ import { fetchData } from "../Authentication/decodeJWT";
 import { Link, Redirect } from "react-router-dom";
 import logoutUser from "../Functionality/Logout";
 import UserHomePage from "../Pages/UserHomePage"
+import UserOverview from "../Pages/UserOverview";
 
 export default function LoggedInAdmin ( { setLoggedIn }, loggedIn) {
 
     function OverView() {
-        return <div></div>
+        return <UserOverview/>
     }
 
     function LoggedIn() {
@@ -25,8 +26,8 @@ export default function LoggedInAdmin ( { setLoggedIn }, loggedIn) {
           </div>
         );
     }
-    
-    const HomeLoggedIn = () => <LoggedIn />;
+
+    const HomeLoggedIn = () => <LoggedIn/>;
 
     const showUserPage = () => {
         if(loggedIn === false) {
