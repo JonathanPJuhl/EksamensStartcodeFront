@@ -5,6 +5,8 @@ import { fetchData } from "../Authentication/decodeJWT";
 import { Link, Redirect } from "react-router-dom";
 import logoutUser from "../Functionality/Logout";
 import UserHomePage from "../Pages/UserHomePage"
+import Connections from "../Pages/Connections";
+import SearchForUsers from "../Pages/SearchUsers";
 
 export default function LoggedInUser ( { setLoggedIn }, loggedIn ) {
     
@@ -22,6 +24,10 @@ export default function LoggedInUser ( { setLoggedIn }, loggedIn ) {
         );
     }
     const HomeLoggedIn = () => <LoggedIn />;
+
+    const ConnectionsPage = () => <Connections/>;
+
+    const FindConnectionsPage = () => <SearchForUsers/>
 
     const showUserPage = () => {
         if(loggedIn === false) {
@@ -57,6 +63,8 @@ export default function LoggedInUser ( { setLoggedIn }, loggedIn ) {
                   <Route path="/" exact component={HomeLoggedIn} />
                   <Route path="/sys-frontend/" exact component={HomeLoggedIn} />
                   <Route path="/profile/" exact component={showUserPage} />
+                  <Route path="/connections/" exact component={ConnectionsPage} />
+                  <Route path="/findconnections/" exact component={FindConnectionsPage} />
                   <Route path="/logout" component={logoutBtn} />
                 </Switch>
               </div>

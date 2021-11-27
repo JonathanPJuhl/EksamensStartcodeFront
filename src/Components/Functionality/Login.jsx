@@ -21,11 +21,12 @@ const loggedIn = () => {
   return loggedIn;
 };
 
-async function loginWithUser (user, password, ip, {setLoggedIn, setRole}) {
+async function loginWithUser (user, password, ip, twoFactor, {setLoggedIn, setRole}) {
  const options = makeOptions("POST", true, {
    username: user,
    password: password,
    ip: ip,
+   twoFactor: twoFactor,
  });
   return await fetch(loginURL, options)
     .then(handleHttpErrors)

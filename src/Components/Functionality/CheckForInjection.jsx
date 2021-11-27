@@ -5,3 +5,12 @@ export default function CheckForInjection(string) {
     }
     return true;
 };
+function CheckObjForInjection(obj) {
+  for (const [key, value] of Object.entries(obj)) {
+    if (value.toLowerCase().includes("<script>")) {
+      return false;
+    }
+  }
+  return true;
+};
+export {CheckObjForInjection};
