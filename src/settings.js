@@ -16,11 +16,20 @@ const uploadPP = URL + "user/uploadfile";
 const virusTotal = "https://www.virustotal.com/api/v3/files";
 const registerMaliciousIntentURL = URL + "malicious";
 const unlockURL = URL + "user/unlock";
+const verifyURL = URL + "user/verify/account";
 const sendTwoFactor = URL + "login/2fa";
-const validateTwoFactor = URL + "login/2fa/validate";
+//const validateTwoFactor = URL + "login/2fa/validate";
 const allUsers = URL + "admin/allUsers";
 const activateUser = URL + "admin/user/activate";
 const deActivateUser = URL + "admin/user/deactivate";
+const getAllUsersForUser = URL + "connection/all/users"
+const getAllConnectionsForUser = URL + "connection/my/connections"
+const addConnectionsForUser = URL + "connection/send/request"
+const removeConnectionForUser = URL + "connection/unsend/request"
+const acceptConnectionsFromUser = URL + "connection/accept/request"
+const denyConnectionsFromUser = URL + "connection/deny/request"
+const getAllPendingrequests = URL + "connection/pending/requests"
+
 
 export {
   adminURL,
@@ -37,9 +46,17 @@ export {
   virusTotal,
   registerMaliciousIntentURL,
   unlockURL,
+  verifyURL,
   sendTwoFactor,
-  validateTwoFactor,
+  //validateTwoFactor,
   allUsers,
   activateUser,
   deActivateUser,
+  getAllUsersForUser,
+  getAllConnectionsForUser,
+  addConnectionsForUser,
+  removeConnectionForUser,
+  acceptConnectionsFromUser,
+  denyConnectionsFromUser,
+  getAllPendingrequests,
 };

@@ -4,16 +4,32 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import AddUser from "../Functionality/AddUser";
 import "../../App.css";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import ReCAPTCHA from "react-google-recaptcha";
+import { captcha } from "../../settings";
+import {CheckObjForInjection} from "../Functionality/CheckForInjection";
 
 function AddUserUI() {
+
+  const mailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
   const init = {
     username: "",
     password: "",
     passCheck: "",
-    recoveryquestion: "",
-    answer: "",
   };
+  const [captchaVal, setCaptcha] = useState();
+
   const [user, setUser] = useState(init);
+
+  function validateRecaptcha() {
+    if (captchaVal === undefined) {
+        return false;
+    } else {
+        return true;
+    }
+  }
 
   const handleChange = (evt) => {
     evt.preventDefault();
@@ -23,27 +39,49 @@ function AddUserUI() {
 
     setUser({ ...user, [id]: value });
   };
+  const onCaptchaChange = (value) => {
+    setCaptcha(value);
+  };
+
+
   function handleSubmit(evt) {
     evt.preventDefault();
+    console.log(user.username);
+    if(!CheckObjForInjection(user)) {
+      toast("Please don't input scripts")
+      return;
+    }
+    if (!mailRegex.test(user.username)){
+      toast("Invalid email");
+      return
+    }
+    if (!validateRecaptcha()) {
+      toast("please confirm you are not a robot");
+      return
+    }
     if (user.password !== user.passCheck) {
-      alert("passwords don't match");
-    } else if (user.password === user.passCheck && user.password.length < 8) {
-      alert("password must be more than 8 characters");
-    } else {
+      toast("passwords don't match");
+      return
+    } 
+    else if (user.password === user.passCheck && (user.password.length < 8 || user.password.legnth > 64)) {
+      toast("password must be more than 8 characters");
+      return
+    }
+    else {
       AddUser(user);
-      alert("Success creating user, now please login");
     }
   }
 
   return (
     <div>
+      <ToastContainer />
       <Container fluid>
         <form onChange={handleChange}>
           <Row>
             <Col>
               <input
                 class="stretch-to-fit"
-                type="text"
+                type="email"
                 id="username"
                 placeholder="email"
               ></input>
@@ -72,35 +110,7 @@ function AddUserUI() {
           </Row>
           <Row>
             <Col>
-              {" "}
-              <select
-                class="stretch-to-fit"
-                name="recoveryquestion"
-                id="recoveryquestion"
-              >
-                <option value="Choose..." selected>
-                  Choose...
-                </option>
-                <option value="First pets name">First pets name</option>
-                <option value="Name of your highschool">
-                  Name of your highschool
-                </option>
-                <option value="Mothers maiden name">Mothers maiden name</option>
-                <option value="Street you grew up on">
-                  Street you grew up on
-                </option>
-              </select>
-            </Col>
-          </Row>
-          <Row>
-            <Col>
-              {" "}
-              <input
-                type="text"
-                class="stretch-to-fit"
-                id="answer"
-                placeholder="Answer for recovery question"
-              ></input>
+              <ReCAPTCHA sitekey={captcha} onChange={onCaptchaChange} />
             </Col>
           </Row>
           <Row>

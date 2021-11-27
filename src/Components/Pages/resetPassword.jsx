@@ -3,16 +3,18 @@ import "../../App.css";
 import React, { useState } from "react";
 import handleHttpErrors from "../Errors/Errors"
 import makeOptions from "../Functionality/MakeOptionsWithToken";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function Reset() {
 
-  const [accountInfo, setaccountInfo] = useState({email: "", answerToSecurityQuestion: ""});
+  const [accountInfo, setaccountInfo] = useState({email: ""});
 
   const fetchSearchData = async () => {
     const options = makeOptions("POST", false, accountInfo);
     return fetch(resetURL, options)
       .then(handleHttpErrors)
-       .then(alert("Mail sent to: " + accountInfo.email))
+       .then(toast("Mail sent to: " + accountInfo.email))
   };
   
   const HandleOnChange = (evt) => {
@@ -27,13 +29,12 @@ function Reset() {
   return (
     <div>
         <form onChange={HandleOnChange} >
+          <ToastContainer/>
         <p>Username:</p>
         <input type="text" id="email"></input>
-        <p>Answer to recoveryquestion: </p>
-        <input type="text" id="answerToSecurityQuestion"></input>
         <br></br>
         <br></br>
-        <p>Forgot your password - or just want to reset it?</p>
+        <p>Send reset link to this mail</p>
         <input class="buttons" type="button" value="Submit" onClick={fetchSearchData}Reset password/>
         </form >
     </div>
@@ -41,7 +42,7 @@ function Reset() {
 }
 
 function ResetPassword(){
-  const [newPass, setNewPass] = useState({username: "", password: "", passConfirm: ""});
+  const [newPass, setNewPass] = useState({email: "", password: "", passConfirm: "", key: ""});
 
   
   const HandleOnChangePass = (evt) => {
@@ -53,11 +54,19 @@ function ResetPassword(){
     setNewPass({ ...newPass, [id]: value });
     };
 
-  const fetchSearchDataPass = async () => {
-    const options = makeOptions("POST", newPass);
+  const fetchSearchDataPass = async (evt) => {
+    evt.preventDefault()
+    if (newPass.password !== newPass.passConfirm) {
+      toast("passwords don't match");
+      return
+    } 
+    else if (newPass.password === newPass.passConfirm && (newPass.password.length < 8 || newPass.password.legnth > 64)) {
+      toast("password must be more than 8 characters");
+      return
+    }
+    const options = makeOptions("POST", false, newPass);
     return fetch(newPasswordURL, options)
       .then(handleHttpErrors)
-       
       .then(alert("Password successfully reset"));
   };
   
@@ -66,15 +75,16 @@ function ResetPassword(){
     <div>
         <form onChange={HandleOnChangePass}>
         <p>Email:</p>
-        <input type="text" id="username"></input>
+        <input type="text" id="email"></input>
         <p>New password:</p>
-        <input type="text" id="password"></input>
+        <input type="password" id="password"></input>
         <p>Confirm password </p>
-        <input type="text" id="passConfirm"></input>
+        <input type="password" id="passConfirm"></input>
+        <p>Confirmation key </p>
+        <input type="password" id="key"></input>
         <br></br>
         <br></br>
-        <p>Create new password</p>
-        <input type="button" class="buttons" value="Submit" onClick={fetchSearchDataPass}/>
+        <input type="submit" class="buttons" value="Create new password" onClick={fetchSearchDataPass}/>
         </form>
     </div>
   );
