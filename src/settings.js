@@ -1,5 +1,5 @@
-const URL = "http://localhost:8080/backend_eksamen/api/";
-//const URL = "https://www.ipwithme.dk/backend_eksamen/api/"
+//const URL = "http://localhost:8080/backend_eksamen/api/";
+const URL = "https://www.ipwithme.dk/tomcat/backend_eksamen/api/"
 
 const captcha = "6Lf-_TodAAAAAA3qqZXc7i4TtBY46F-04Meosv6s";
 
@@ -18,7 +18,6 @@ const registerMaliciousIntentURL = URL + "malicious";
 const unlockURL = URL + "user/unlock";
 const verifyURL = URL + "user/verify/account";
 const sendTwoFactor = URL + "login/2fa";
-//const validateTwoFactor = URL + "login/2fa/validate";
 const allUsers = URL + "admin/allUsers";
 const activateUser = URL + "admin/user/activate";
 const deActivateUser = URL + "admin/user/deactivate";
@@ -48,7 +47,6 @@ export {
   unlockURL,
   verifyURL,
   sendTwoFactor,
-  //validateTwoFactor,
   allUsers,
   activateUser,
   deActivateUser,
