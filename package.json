@@ -37,7 +37,7 @@
       "react-app/jest"
     ]
   },
-  "homepage": "../eksamen-front",
+  "homepage": "https://ipwithme.dk",
   "browserslist": {
     "production": [
       ">0.2%",

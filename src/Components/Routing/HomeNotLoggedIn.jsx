@@ -33,7 +33,7 @@ export default function HomeNotLoggedIn ( {setLoggedIn, setRole}) {
               <Route path="/login" component={Login} />
               <Route path="/signup" component={signup} />
               <Route path="/resetpass" component={Reset}/>
-              <Route path="/resetPW/" component={ResetPassword}/>
+              <Route path="/resetPW" component={ResetPassword}/>
               <Route component={ResetPassword} />
             </Switch>
           </div>
